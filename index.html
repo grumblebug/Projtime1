@@ -7,53 +7,54 @@
 
 <head>
 <title>Project Countdown</title>
-<style>
-body{
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: 100;
-}
+  <style>
+    body{
+      text-align: center;
+      font-family: sans-serif;
+      font-weight: 100;
+    }
 
-h1{
-  color: #396;
-  font-weight: 100;
-  font-size: 40px;
-  margin: 40px 0px 20px;
-}
+    h1{
+      color: #396;
+      font-weight: 100;
+      font-size: 40px;
+      margin: 40px 0px 20px;
+    }
 
-#clockdiv{
-	font-family: sans-serif;
-	color: #fff;
-	display: inline-block;
-	font-weight: 100;
-	text-align: center;
-	font-size: 25px;
-}
+    #clockdiv{
+      font-family: sans-serif;
+      color: #fff;
+      display: inline-block;
+      font-weight: 100;
+      text-align: center;
+      font-size: 25px;
+    }
 
-#clockdiv > div{
-	padding: 8px;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	background: #1678a3;
-	display: inline-block;
-}
+    #clockdiv > div{
+      padding: 8px;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      box-shadow: 1px 1px #7c868d
+      background: #1678a3;
+      display: inline-block;
+    }
 
-#clockdiv div > span{
-	padding: 10px;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	background: #289ad5;
-	display: inline-block;
-}
+    #clockdiv div > span{
+      padding: 10px;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      background: #289ad5;  
+      display: inline-block;
+    }
 
-.smalltext{
-	padding-top: 5px;
-	font-size: 14px;
-}
-</style>
+    .smalltext{	
+      padding-top: 5px;        
+      font-size: 14px;
+    }
+  </style>
 </head>
-<body>
 
+<body>
 <div id="clockdiv">
   <div>
     <span class="days"></span>
@@ -75,6 +76,7 @@ h1{
 -->
 </div>
 <script>
+  /* Get the date/time values */
   function getTimeRemaining(endtime){
   var t = Date.parse(endtime) - Date.parse(new Date());
   var minutes = Math.floor( (t/1000/60) % 60 );
@@ -101,8 +103,8 @@ function initializeClock(id, endtime){
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
 
-    // Change the color of the days span if there's less than a 
-    // week left. This is hard-coded here because I'm lazy.
+    /* Change the color of the days span if there's less than a 
+       week left. This is hard-coded here because I'm lazy. */
     if (t.days < 7) {
       var elem = document.querySelector('#clockdiv div > span');
       elem.style.background = '#d59a28';
@@ -120,13 +122,12 @@ function initializeClock(id, endtime){
 
 }
 
-// Read the variables in from the URL
-// Format: deadline=month day year hh:mm:ss UTC+offset
-// New York UTC offset is -0300
-// So, for July 17 2023 at 1 second past midnight in NYC...
-//
-// deadline=July 17 2023 00:00:01 UTC-0300
-
+/* Read the variables in from the URL
+   Format: deadline=month day year hh:mm:ss UTC+offset
+   New York UTC offset is -0300
+   So, for July 17 2023 at 1 second past midnight in NYC...
+   
+   deadline=July 17 2023 00:00:01 UTC-0300 */
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const deadline = urlParams.get('deadline')
