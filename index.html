@@ -94,7 +94,7 @@
 function initializeClock(id, endtime){
   var clock = document.getElementById(id);
   var daysSpan = clock.querySelector('.days');
-  /* var hoursSpan = clock.querySelector('.hours'); */
+  var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
 
   function updateClock(){
@@ -102,7 +102,7 @@ function initializeClock(id, endtime){
 
     daysSpan.innerHTML = t.days;
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    /* minutesSpan.innerHTML = ('0' + t.minutes).slice(-2); */
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
 
     /* Change the color of the days span if there's less than a 
        week left. This is hard-coded here because I'm lazy. */
