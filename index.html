@@ -105,17 +105,33 @@ function initializeClock(id, endtime){
 
    /* ===================================================== */
    /*  Change the color of the days span if there's less    */
-   /*  than a week left. This is hard-coded here because    */
-   /*  I'm lazy. Changing the elements after the fact is    */
-   /*  hacky but it works for now                           */
+   /*  than two weeks left. This is hard-coded here         */
+   /*  because I'm lazy. Changing the elements after the    */
+   /*  fact is hacky but it works for now                   */
    /* ===================================================== */
-    if (t.days < 8) {
+    if (t.days < 14) {
       /* ar elem = document.querySelector('#clockdiv div > span'); */
-      daysSpan.style.background = '#e8e41fc7';
+      daysSpan.style.background = '#e6e600';
       daysSpan.style.color = 'black';
-      hoursSpan.style.background = '#e8e41fc7';
+      hoursSpan.style.background = '#e6e600';
       hoursSpan.style.color = 'black';
-      minutesSpan.style.background = '#e8e41fc7';
+      minutesSpan.style.background = '#e6e600';
+      minutesSpan.style.color = 'black';
+    }
+
+   /* ===================================================== */
+   /*  Change the color of the days span if there's less    */
+   /*  than one week left. This is hard-coded here          */
+   /*  because I'm lazy. Changing the elements after the    */
+   /*  fact is hacky but it works for now                   */
+   /* ===================================================== */
+   if (t.days < 8) {
+      /* ar elem = document.querySelector('#clockdiv div > span'); */
+      daysSpan.style.background = '#f9aa00';
+      daysSpan.style.color = 'black';
+      hoursSpan.style.background = '#f9aa00';
+      hoursSpan.style.color = 'black';
+      minutesSpan.style.background = '#f9aa00';
       minutesSpan.style.color = 'black';
     }
 
