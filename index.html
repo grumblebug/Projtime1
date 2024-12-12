@@ -4,8 +4,6 @@
 <!-- 20241212 grumblebug                                                       -->
 <!--                                                                           -->
 <!--  Modified from https://gist.github.com/davebarnwell/c54056e398514e8732c3  -->
-<!--                                                                           -->
-<!--                            HAPPY BIRTHDAY ABBY!                           -->
 <!-- ------------------------------------------------------------------------- -->
 
 <head>
@@ -73,6 +71,16 @@
   </div>
 </div>
 <script>
+  /* ********************************************** */
+  /*  If this is set to 0, console logs are off     */
+  /*  and speedy cycle times are selected to help   */
+  /*  with debugging.                               */
+  /* ********************************************** */
+  debug = 0
+  if (debug === 0) {
+    console.log = function () {};
+  }
+
   /* ===================================================== */
   /*  Get the date/time values                             */
   /* ===================================================== */
@@ -101,9 +109,32 @@ function initializeClock(id, endtime){
   function updateClock(){
     var t = getTimeRemaining(endtime);
 
-    daysSpan.innerHTML = ('0' + t.days).slice(-2);
+    /* ===================================================== */
+    /*  This is hacky but we need to calculate how much of   */
+    /*  the number to show in the div. If we only show two   */
+    /*  digits for the days, the counter is only useful for  */
+    /*  times under 100 days. It's a little safe to stop at  */
+    /*  thousands because 9999 days is a little over 27      */
+    /*  years and that's a long time for a project plan -    */
+    /*  or website to be alive.                              */
+    /* ===================================================== */
+    if (t.days >= 1000){
+      daysSpan.innerHTML = ('0' + t.days).slice(-4);
+      console.log("got to 1000");
+    } else if (t.days >= 100){
+      daysSpan.innerHTML = ('0' + t.days).slice(-3);
+      console.log("got to 100");
+    } else if (t.days >= 10){
+      daysSpan.innerHTML = ('0' + t.days).slice(-2);
+      console.log("got to 10");
+    }
+    
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+
+    console.log(t.days);
+    console.log(t.hours);
+    console.log(t.minutes);
 
      /* ===================================================== */
      /*  Change the color of the days span if there's less    */
