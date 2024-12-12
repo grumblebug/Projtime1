@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!-- ------------------------------------------------------------------------- -->
-<!-- 20241125 grumblebug                                                       -->
+<!-- 20241212 grumblebug                                                       -->
 <!--                                                                           -->
 <!--  Modified from https://gist.github.com/davebarnwell/c54056e398514e8732c3  -->
 <!-- ------------------------------------------------------------------------- -->
@@ -57,15 +57,15 @@
 <!--   Set up the counter layout                             -->
 <!-- ------------------------------------------------------- -->
 <div id="clockdiv">
-  <div>
+  <div id="clockdays">
     <span class="days"></span>
     <div class="smalltext">Days</div>
   </div>
-  <div>
+  <div id="clockhours">
     <span class="hours"></span>
     <div class="smalltext">Hours</div>
   </div>
-  <div>
+  <div id="clockminutes">
     <span class="minutes"></span>
     <div class="smalltext">Minutes</div>
   </div>
@@ -103,54 +103,70 @@ function initializeClock(id, endtime){
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
 
-   /* ===================================================== */
-   /*  Change the color of the days span if there's less    */
-   /*  than two weeks left. This is hard-coded here         */
-   /*  because I'm lazy. Changing the elements after the    */
-   /*  fact is hacky but it works for now                   */
-   /* ===================================================== */
-    if (t.days < 14) {
-      /* ar elem = document.querySelector('#clockdiv div > span'); */
-      daysSpan.style.background = '#e6e600';
-      daysSpan.style.color = 'black';
-      hoursSpan.style.background = '#e6e600';
-      hoursSpan.style.color = 'black';
-      minutesSpan.style.background = '#e6e600';
-      minutesSpan.style.color = 'black';
-    }
+     /* ===================================================== */
+     /*  Change the color of the days span if there's less    */
+     /*  than two weeks left. This is hard-coded here         */
+     /*  because I'm lazy. Changing the elements after the    */
+     /*  fact is hacky but it works for now                   */
+     /* ===================================================== */
+     if (t.days < 20) {
+        clockdays.style.background = '#8d8f11';
+        clockhours.style.background = '#8d8f11';
+        clockminutes.style.background = '#8d8f11';
+      
+        daysSpan.style.background = '#e6e600';
+        hoursSpan.style.background = '#e6e600';
+        minutesSpan.style.background = '#e6e600';
 
-   /* ===================================================== */
-   /*  Change the color of the days span if there's less    */
-   /*  than one week left. This is hard-coded here          */
-   /*  because I'm lazy. Changing the elements after the    */
-   /*  fact is hacky but it works for now                   */
-   /* ===================================================== */
-   if (t.days < 8) {
-      /* ar elem = document.querySelector('#clockdiv div > span'); */
-      daysSpan.style.background = '#f9aa00';
-      daysSpan.style.color = 'black';
-      hoursSpan.style.background = '#f9aa00';
-      hoursSpan.style.color = 'black';
-      minutesSpan.style.background = '#f9aa00';
-      minutesSpan.style.color = 'black';
-    }
+        daysSpan.style.color = 'black';
+        hoursSpan.style.color = 'black';
+        minutesSpan.style.color = 'black';
+     }
+
+     /* ===================================================== */
+     /*  Change the color of the days span if there's less    */
+     /*  than one week left. This is hard-coded here          */
+     /*  because I'm lazy. Changing the elements after the    */
+     /*  fact is hacky but it works for now                   */
+     /* ===================================================== */
+     if (t.days < 8) {
+        clockdays.style.background = '#8f7411';
+        clockhours.style.background = '#8f7411';
+        clockminutes.style.background = '#8f7411';
+
+        daysSpan.style.background = '#f9aa00';
+        hoursSpan.style.background = '#f9aa00';
+        minutesSpan.style.background = '#f9aa00';
+
+        daysSpan.style.color = 'black';
+        hoursSpan.style.color = 'black';     
+        minutesSpan.style.color = 'black';
+     }
+
+     /* ===================================================== */
+     /*  Change the color of the days span if there's less    */
+     /*  than zero days left. This is hard-coded here         */
+     /*  because I'm lazy. The hacky element changing is      */
+     /*  heere as well. I need to figure out how to make      */
+     /*  this work better                                     */
+     /* ===================================================== */
+     if (t.days < 0){
+        clockdays.style.background = '#630818';
+        clockhours.style.background = '#630818';
+        clockminutes.style.background = '#630818';
+
+        daysSpan.style.background = '#d91f1fc7';
+        hoursSpan.style.background = '#d91f1fc7';
+        minutesSpan.style.background = '#d91f1fc7';
+
+        daysSpan.style.color = 'whitesmoke';
+        hoursSpan.style.color = 'whitesmoke';
+        minutesSpan.style.color = 'whitesmoke';
+     }
 
     /* ===================================================== */
-    /*  Change the color of the days span if there's less    */
-    /*  than zero days left. This is hard-coded here         */
-    /*  because I'm lazy. The hacky element changing is      */
-    /*  heere as well. I need to figure out how to make      */
-    /*  this work better                                     */
+    /*  Stop
     /* ===================================================== */
-    if (t.days < 1){
-      daysSpan.style.background = '#d91f1fc7';
-      daysSpan.style.color = 'whitesmoke';
-      hoursSpan.style.background = '#d91f1fc7';
-      hoursSpan.style.color = 'whitesmoke';
-      minutesSpan.style.background = '#d91f1fc7';
-      minutesSpan.style.color = 'whitesmoke';
-    }
-
     if (t.total <= 0) {
       clearInterval(timeinterval);
     }
