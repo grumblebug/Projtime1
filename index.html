@@ -125,7 +125,6 @@ function initializeClock(id, endtime){
     } else {
       hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     }
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     if (t.minutes < 0 && t.minutes > -10) {
       minutesSpan.innerHTML = ('0' + t.minutes).slice(-1);
     } else {
@@ -138,64 +137,48 @@ function initializeClock(id, endtime){
 
      /* ===================================================== */
      /*  Change the color of the days span if there's less    */
-     /*  than two weeks left. This is hard-coded here         */
-     /*  because I'm lazy. Changing the elements after the    */
-     /*  fact is hacky but it works for now                   */
+     /*  than two weeks left.                                 */
      /* ===================================================== */
      if (t.days < 20) {
-        clockdays.style.background = '#8d8f11';
-        clockhours.style.background = '#8d8f11';
-        clockminutes.style.background = '#8d8f11';
-      
-        daysSpan.style.background = '#e6e600';
-        hoursSpan.style.background = '#e6e600';
-        minutesSpan.style.background = '#e6e600';
-
-        daysSpan.style.color = 'black';
-        hoursSpan.style.color = 'black';
-        minutesSpan.style.color = 'black';
+        clockBgColor = '#8d8f11';
+        spanBgColor = '#e6e600';
+        textColor = 'black';
      }
 
      /* ===================================================== */
      /*  Change the color of the days span if there's less    */
-     /*  than one week left. This is hard-coded here          */
-     /*  because I'm lazy. Changing the elements after the    */
-     /*  fact is hacky but it works for now                   */
+     /*  than one week left.                                  */
      /* ===================================================== */
      if (t.days < 8) {
-        clockdays.style.background = '#8f7411';
-        clockhours.style.background = '#8f7411';
-        clockminutes.style.background = '#8f7411';
-
-        daysSpan.style.background = '#f9aa00';
-        hoursSpan.style.background = '#f9aa00';
-        minutesSpan.style.background = '#f9aa00';
-
-        daysSpan.style.color = 'black';
-        hoursSpan.style.color = 'black';     
-        minutesSpan.style.color = 'black';
+        clockBgColor = '#8f7411';
+        spanBgColor = '#f9aa00';
+        textColor = 'black';
      }
 
      /* ===================================================== */
      /*  Change the color of the days span if there's less    */
-     /*  than zero days left. This is hard-coded here         */
-     /*  because I'm lazy. The hacky element changing is      */
-     /*  heere as well. I need to figure out how to make      */
-     /*  this work better                                     */
+     /*  than zero days left.                                 */
      /* ===================================================== */
      if (t.days < 0){
-        clockdays.style.background = '#630818';
-        clockhours.style.background = '#630818';
-        clockminutes.style.background = '#630818';
-
-        daysSpan.style.background = '#d91f1fc7';
-        hoursSpan.style.background = '#d91f1fc7';
-        minutesSpan.style.background = '#d91f1fc7';
-
-        daysSpan.style.color = 'whitesmoke';
-        hoursSpan.style.color = 'whitesmoke';
-        minutesSpan.style.color = 'whitesmoke';
+        clockBgColor = '#630818';
+        spanBgColor = '#d91f1fc7';
+        textColor = 'whitesmoke';
      }
+
+     /* ===================================================== */
+     /*  Apply the colors to the div, span, and text.         */
+     /* ===================================================== */
+     clockdays.style.background = clockBgColor;
+     clockhours.style.background = clockBgColor
+     clockminutes.style.background = clockBgColor;
+
+     daysSpan.style.background = spanBgColor;
+     hoursSpan.style.background = spanBgColor;
+     minutesSpan.style.background = spanBgColor;
+
+     daysSpan.style.color = textColor;
+     hoursSpan.style.color = textColor;     
+     minutesSpan.style.color = textColor;
 
     /* ===================================================== */
     /*  Stop
