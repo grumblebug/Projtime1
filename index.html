@@ -70,13 +70,17 @@
     <div class="smalltext">Minutes</div>
   </div>
 </div>
+
+<!-- ------------------------------------------------------- -->
+<!--   Script to draw the countdown clock                    -->
+<!-- ------------------------------------------------------- -->
 <script>
   /* ********************************************** */
   /*  If this is set to 0, console logs are off     */
   /*  and speedy cycle times are selected to help   */
   /*  with debugging.                               */
   /* ********************************************** */
-  debug = 0
+  debug = 1
   if (debug === 0) {
     console.log = function () {};
   }
@@ -116,8 +120,17 @@ function initializeClock(id, endtime){
     /*  So, we'll slice those to 2 digits.                   */
     /* ===================================================== */
     daysSpan.innerHTML = t.days;
+    if (t.hours < 0 && t.hours > -10) {
+      hoursSpan.innerHTML = ('0' + t.hours).slice(-1);
+    } else {
+      hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    }
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    if (t.minutes < 0 && t.minutes > -10) {
+      minutesSpan.innerHTML = ('0' + t.minutes).slice(-1);
+    } else {
+      minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    }
 
     console.log(t.days);
     console.log(t.hours);
