@@ -110,25 +110,12 @@ function initializeClock(id, endtime){
     var t = getTimeRemaining(endtime);
 
     /* ===================================================== */
-    /*  This is hacky but we need to calculate how much of   */
-    /*  the number to show in the div. If we only show two   */
-    /*  digits for the days, the counter is only useful for  */
-    /*  times under 100 days. It's a little safe to stop at  */
-    /*  thousands because 9999 days is a little over 27      */
-    /*  years and that's a long time for a project plan -    */
-    /*  or website to be alive.                              */
+    /*  We need to know if the project ran over by showing   */
+    /*  whether it's a negative number for the days but we   */
+    /*  don't want that on the hours or minutes              */
+    /*  So, we'll slice those to 2 digits.                   */
     /* ===================================================== */
-    if (t.days >= 1000){
-      daysSpan.innerHTML = ('0' + t.days).slice(-4);
-      console.log("got to 1000");
-    } else if (t.days >= 100){
-      daysSpan.innerHTML = ('0' + t.days).slice(-3);
-      console.log("got to 100");
-    } else if (t.days >= 10){
-      daysSpan.innerHTML = ('0' + t.days).slice(-2);
-      console.log("got to 10");
-    }
-    
+    daysSpan.innerHTML = t.days;
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
 
